@@ -1,27 +1,39 @@
+version: "3.7"
+
+# We define a YAML anchor for common environment variables
+x-environment: &mongo_env
+  MONGO_INITDB_ROOT_USERNAME: "umbrel"
+  MONGO_INITDB_ROOT_PASSWORD: "secretpassword"
+
 services:
   app_proxy:
     environment:
-      APP_HOST: ephraimapps_web_1
+      APP_HOST: ephraimapps-mongodb_mongo-express_1
       APP_PORT: 8083
 
-  # MongoDB (7.x), no forced user, explicitly bind all interfaces
   mongo:
     image: mongo:7.0.0
-    command: ["--bind_ip_all"]
     restart: on-failure
+    ports:
+      - "27017:27017"
+
+    command: ["--bind_ip_all"]
+
     environment:
-      MONGO_INITDB_ROOT_USERNAME: umbrel
-      MONGO_INITDB_ROOT_PASSWORD: secretpassword
+      <<: *mongo_env  
     volumes:
       - ${APP_DATA_DIR}/data:/data/db
 
-  # Mongo Express
-  web:
+  mongo-express:
     image: mongo-express:latest
     restart: on-failure
+    depends_on:
+      - mongo
     environment:
       ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_ADMINUSERNAME: umbrel
-      ME_CONFIG_MONGODB_ADMINPASSWORD: secretpassword
+
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+
       ME_CONFIG_SITE_PORT: 8083
