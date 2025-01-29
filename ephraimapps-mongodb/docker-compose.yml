@@ -1,52 +1,27 @@
-# Omit or remove the Compose version line (Umbrel will warn if present)
-# version: "3.7"
-
 services:
-  # ----------------------------------------------------------
-  # 1) Umbrel-required app_proxy service
-  # ----------------------------------------------------------
   app_proxy:
     environment:
-      # Must match your app ID + "_web_1"
-      # If your app ID is "ephraimapps-mongodb", and service is "web":
-      APP_HOST: ephraimapps-mongodb_web_1
+      APP_HOST: ephraimapps_web_1
       APP_PORT: 8083
 
-  # ----------------------------------------------------------
-  # 2) MongoDB container (7.x)
-  # ----------------------------------------------------------
+  # MongoDB (7.x), no forced user, explicitly bind all interfaces
   mongo:
     image: mongo:7.0.0
-    # If you see permission issues, remove this line
-    user: "1000:1000"
-    init: true
+    command: ["--bind_ip_all"]
     restart: on-failure
-    stop_grace_period: 1m
-
     environment:
-      MONGO_INITDB_ROOT_USERNAME: "umbrel"
-      MONGO_INITDB_ROOT_PASSWORD: "secretpassword"
-
-    # Persist data inside Umbrel
+      MONGO_INITDB_ROOT_USERNAME: umbrel
+      MONGO_INITDB_ROOT_PASSWORD: secretpassword
     volumes:
       - ${APP_DATA_DIR}/data:/data/db
 
-  # ----------------------------------------------------------
-  # 3) Mongo Express (the “web” container)
-  # ----------------------------------------------------------
+  # Mongo Express
   web:
     image: mongo-express:latest
-    # Often best NOT to force user: "1000:1000" here
-    init: true
     restart: on-failure
-    stop_grace_period: 1m
-
     environment:
-      # Point to the "mongo" service
       ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_ADMINUSERNAME: "umbrel"
-      ME_CONFIG_MONGODB_ADMINPASSWORD: "secretpassword"
-
-      # The port inside this container (to match APP_PORT above)
+      ME_CONFIG_MONGODB_ADMINUSERNAME: umbrel
+      ME_CONFIG_MONGODB_ADMINPASSWORD: secretpassword
       ME_CONFIG_SITE_PORT: 8083
