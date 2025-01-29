@@ -1,0 +1,30 @@
+manifestVersion: 1
+id: ephraimapps-mongodb
+name: MongoDB & Mongo Express
+tagline: A NoSQL database with a web-based admin interface.
+icon: https://static-00.iconduck.com/assets.00/mongodb-icon-512x512-mhzq0108.png
+category: Database
+version: "1.0.0"
+port: 8082
+description: >-
+  MongoDB is a powerful NoSQL database, and Mongo Express provides
+  a web-based interface for managing your data with ease.
+
+  Deploy MongoDB and manage your collections using a simple UI.
+
+developer: MongoDB, Inc.
+website: https://www.mongodb.com
+submitter: Ephraim
+submission: https://github.com/ephraimapps/umbrel-mongodb
+repo: https://github.com/ephraimapps/umbrel-mongodb
+support: https://github.com/ephraimapps/umbrel-mongodb/issues
+gallery:
+  - https://i.imgur.com/yyVG0Jb.jpeg
+  - https://i.imgur.com/yyVG0Jb.jpeg
+  - https://i.imgur.com/yyVG0Jb.jpeg
+releaseNotes: >-
+  Initial release of MongoDB with Mongo Express for Umbrel.
+dependencies: []
+path: ""
+defaultUsername: "admin"
+defaultPassword: "password"
