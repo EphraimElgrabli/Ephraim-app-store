@@ -6,7 +6,7 @@ services:
     environment:
       # Format: <app-id>_<docker-service-name>_1
       APP_HOST: mongodb_mongo-express_1
-      APP_PORT: 8082
+      APP_PORT: 8083
 
   mongodb:
     image: mongo:latest
@@ -29,7 +29,7 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: password
       ME_CONFIG_MONGODB_URL: mongodb://admin:password@mongodb:27017/
     ports:
-      - "8082:8082"
+      - "8083:8083"
     networks:
       - mongo_network
 
