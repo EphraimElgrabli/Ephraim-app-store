@@ -1,6 +1,5 @@
 version: "3.7"
 
-# We define a YAML anchor for common environment variables
 x-environment: &mongo_env
   MONGO_INITDB_ROOT_USERNAME: "umbrel"
   MONGO_INITDB_ROOT_PASSWORD: "secretpassword"
@@ -9,7 +8,7 @@ services:
   app_proxy:
     environment:
       APP_HOST: ephraimapps-mongodb_mongo-express_1
-      APP_PORT: 8083
+      APP_PORT: 8084
 
   mongo:
     image: mongo:7.0.0
@@ -21,14 +20,11 @@ services:
       <<: *mongo_env
     volumes:
       - ${APP_DATA_DIR}/data:/data/db
-    networks:
-      - mongodb_network
 
   mongo-express:
     image: mongo-express:latest
     restart: on-failure
-    ports:
-      - "8083:8083"
+    # Remove the ports mapping since app_proxy handles external access
     depends_on:
       - mongo
     environment:
@@ -36,10 +32,4 @@ services:
       ME_CONFIG_MONGODB_PORT: 27017
       ME_CONFIG_MONGODB_ADMINUSERNAME: "umbrel"
       ME_CONFIG_MONGODB_ADMINPASSWORD: "secretpassword"
-      ME_CONFIG_SITE_PORT: 8083
-    networks:
-      - mongodb_network
-
-networks:
-  mongodb_network:
-    driver: bridge
+      ME_CONFIG_SITE_PORT: 8084
