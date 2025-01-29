@@ -16,24 +16,30 @@ services:
     restart: on-failure
     ports:
       - "27017:27017"
-
     command: ["--bind_ip_all"]
-
     environment:
-      <<: *mongo_env  
+      <<: *mongo_env
     volumes:
       - ${APP_DATA_DIR}/data:/data/db
+    networks:
+      - mongodb_network
 
   mongo-express:
     image: mongo-express:latest
     restart: on-failure
+    ports:
+      - "8083:8083"
     depends_on:
       - mongo
     environment:
       ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_MONGODB_PORT: 27017
-
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-
+      ME_CONFIG_MONGODB_ADMINUSERNAME: "umbrel"
+      ME_CONFIG_MONGODB_ADMINPASSWORD: "secretpassword"
       ME_CONFIG_SITE_PORT: 8083
+    networks:
+      - mongodb_network
+
+networks:
+  mongodb_network:
+    driver: bridge

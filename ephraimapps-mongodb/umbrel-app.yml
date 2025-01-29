@@ -4,7 +4,7 @@ name: MongoDB & Mongo Express
 tagline: A NoSQL database with a web-based admin interface.
 icon: https://static-00.iconduck.com/assets.00/mongodb-icon-512x512-mhzq0108.png
 category: Database
-version: "1.0.1"
+version: "1.0.2"
 port: 8083
 description: >-
   MongoDB is a powerful NoSQL database, and Mongo Express provides
