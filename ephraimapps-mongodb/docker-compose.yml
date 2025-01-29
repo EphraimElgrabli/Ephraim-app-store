@@ -1,41 +1,44 @@
 version: "3.7"
 
 services:
-
   app_proxy:
     environment:
-      # Format: <app-id>_<docker-service-name>_1
-      APP_HOST: mongodb_mongo-express_1
+      APP_HOST: ephraimapps-mongodb_web_1
       APP_PORT: 8083
 
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb
-    restart: unless-stopped
+  # ----------------------------------------------------------
+  # Main MongoDB server (7.x for local vector indexing)
+  # ----------------------------------------------------------
+  mongo:
+    image: mongo:7.0.0
+    user: "1000:1000"
+    init: true
+    restart: on-failure
+    stop_grace_period: 1m
+
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_ROOT_USERNAME: "umbrel"
+      MONGO_INITDB_ROOT_PASSWORD: "secretpassword"
+
     volumes:
-      - mongodb_data:/data/db
-    networks:
-      - mongo_network
+      - ${APP_DATA_DIR}/data:/data/mongodb
 
-  mongo-express:
-    image: mongo-express
-    container_name: mongo-express
-    restart: unless-stopped
+  # ----------------------------------------------------------
+  # Mongo Express (web-based Mongo admin UI)
+  # ----------------------------------------------------------
+  web:
+    image: mongo-express:latest
+    user: "1000:1000"
+    init: true
+    restart: on-failure
+    stop_grace_period: 1m
+
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD: password
-      ME_CONFIG_MONGODB_URL: mongodb://admin:password@mongodb:27017/
-    ports:
-      - "8083:8083"
-    networks:
-      - mongo_network
+      # Point to the "mongo" service above
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: umbrel
+      ME_CONFIG_MONGODB_ADMINPASSWORD: secretpassword
+      # The internal port on which Mongo Express listens
+      ME_CONFIG_SITE_PORT: 8083
 
-networks:
-  mongo_network:
-    driver: bridge
-
-volumes:
-  mongodb_data:

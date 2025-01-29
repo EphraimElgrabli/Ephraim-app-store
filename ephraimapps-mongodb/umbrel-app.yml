@@ -26,5 +26,5 @@ releaseNotes: >-
   Initial release of MongoDB with Mongo Express for Umbrel.
 dependencies: []
 path: ""
-defaultUsername: "admin"
-defaultPassword: "password"
+defaultUsername: "umbrel"
+defaultPassword: "secretpassword"
