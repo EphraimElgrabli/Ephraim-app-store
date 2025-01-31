@@ -1,7 +1,7 @@
 services:
   app_proxy:
     environment:
-      APP_HOST: ephraimapp-surrealdb_web_1
+      APP_HOST: ephraimapps-surrealdb_web_1
       APP_PORT: 8000
       PROXY_AUTH_ADD: "true"  # Enable Umbrel authentication
 
