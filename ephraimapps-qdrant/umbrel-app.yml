@@ -5,7 +5,7 @@ name: Qdrant Vector Database
 tagline: A high-performance vector database and vector search engine.
 icon: https://raw.githubusercontent.com/qdrant/qdrant/main/docs/logo.png
 category: Database
-version: "1.0.0"
+version: "1.0.1"
 port: 6333
 description: >-
   Qdrant is a powerful vector search database designed for blazing fast queries
