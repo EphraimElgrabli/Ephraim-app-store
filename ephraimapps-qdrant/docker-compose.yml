@@ -10,7 +10,7 @@ services:
       # This must match the container name: <umbrel-app-id>_<service-name>_1
       # If your Umbrel app ID is "qdrant" and your Qdrant service is named "server",
       # then the container is "qdrant_server_1".
-      APP_HOST: qdrant_server_1
+      APP_HOST: ephraimapps-qdrant_server_1
       # Qdrant HTTP port is 6333
       APP_PORT: 6333
 
