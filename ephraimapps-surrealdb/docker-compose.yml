@@ -36,7 +36,7 @@ services:
       # Umbrel automatically provides $APP_PASSWORD to your container. 
       # Here, we just show how you might reference it:
       SURREALDB_ROOT_USER: root
-      SURREALDB_ROOT_PASS: $APP_PASSWORD
+      SURREALDB_ROOT_PASS: some-strong-password
 
     # By default, SurrealDB's Docker image starts with:
     #     surreal start <engine:database>
@@ -47,5 +47,5 @@ services:
       "rocksdb:/data/surrealdb.db",
       "--log", "info",
       "--user", "root",
-      "--pass", "$APP_PASSWORD"
+      "--pass", "some-strong-password"
     ]
