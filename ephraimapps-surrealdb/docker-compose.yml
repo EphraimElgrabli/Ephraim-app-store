@@ -12,8 +12,8 @@ services:
     stop_grace_period: 1m
     command: start --user $SURREAL_USER --pass $SURREAL_PASS file:/data/surreal.db
     environment:
-      SURREAL_USER: $APP_PASSWORD
-      SURREAL_PASS: $APP_PASSWORD
+      SURREAL_USER: root
+      SURREAL_PASS: root
       SURREAL_BIND: 0.0.0.0:8000
 
     volumes:
