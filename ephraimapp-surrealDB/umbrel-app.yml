@@ -1,38 +1,32 @@
 manifestVersion: 1
-
-id: ephraimapps-surrealdb
+id: surrealdb
+category: development
 name: SurrealDB
-tagline: A scalable, distributed, document-graph database for the real-time web
-icon: https://github.com/surrealdb/surrealdb/raw/main/img/whatissurreal.svg
-category: Database
-version: "1.0.1"
-port: 7892
-
-description: >-
-  SurrealDB is a next-generation, serverless, distributed,
-  open-source database with a simple, structured query language. This
-  Umbrel app runs SurrealDB locally for your projects, storing data
-  in a persistent Umbrel volume.
-
-developer: SurrealDB
-website: https://surrealdb.com
-submitter: Ephraim
-submission: https://github.com/ephraimapps/surrealdb-umbrel
-repo: https://github.com/surrealdb/surrealdb
-support: https://discord.gg/surrealdb
-
-gallery:
-  - https://github.com/surrealdb/surrealdb/raw/main/img/interface.png
-  - https://github.com/surrealdb/surrealdb/raw/main/img/illustrations/database-api-security.jpg
-
-releaseNotes: >-
-  Initial release of SurrealDB on Umbrel. SurrealDB is now
-  available for local vector, document, and graph data storage,
-  with minimal configuration.
-
+version: "2.1.4"
+tagline: "A scalable and fast database for the cloud, serverless environments, and the edge."
+description: "SurrealDB is a multi-model database built for modern applications, offering document, graph, and key-value storage in one system."
+developer: "SurrealDB"
+website: "https://surrealdb.com"
 dependencies: []
-path: ""
-
-# SurrealDB default root credentials (if you wish to show them in Umbrel's UI)
-defaultUsername: "umbrel"
-defaultPassword: "secretpassword"
+repo: "https://github.com/surrealdb/surrealdb"
+support: "https://github.com/surrealdb/surrealdb/issues"
+gallery:
+  - "https://surrealdb.com/assets/img/showcase-1.png"
+path: "/surrealdb"
+defaultPassword: "password"
+deterministicPassword: false
+ports:
+  - "8000:8000"
+volumes:
+  - name: surrealdb_data
+    mount: /data
+container:
+  image: "surrealdb/surrealdb:latest"
+  restart: unless-stopped
+  command: ["start", "--user", "root", "--pass", "password"]
+  env:
+    - SURREAL_LOG=info
+  ports:
+    - "8000:8000"
+  volumes:
+    - surrealdb_data:/data
