@@ -1,26 +1,51 @@
 version: "3.7"
 
 services:
+  # The Umbrel "app_proxy" service. 
+  # It handles authentication, HTTPS, Tor hidden service, etc., 
+  # and forwards requests to your container.
   app_proxy:
     environment:
-      APP_HOST: ephraimapps-surrealdb_web_1
+      # The DNS name of your main service is <app-id>_<service-name>_1
+      # with "_1" on the end. We expose the SurrealDB web port below as 8000.
+      APP_HOST: surrealdb_web_1
       APP_PORT: 8000
 
   web:
-    image: surrealdb/surrealdb:1.0.0
+    # Pin the Docker image to both a tag and a sha256 digest.
+    # (Digest below is an example; you should replace it with the real multi-arch digest.)
+    image: surrealdb/surrealdb:nightly-dev@sha256:5d33e829d2c403c60dfbc5cea457a9deb725eabd78b35ac5e498efd12e9d1cce
     restart: on-failure
     stop_grace_period: 1m
-    command: start --user $SURREAL_USER --pass $SURREAL_PASS file:/data/surreal.db
-    environment:
-      SURREAL_USER: root
-      SURREAL_PASS: root
-      SURREAL_BIND: 0.0.0.0:8000
 
+    # Mount a volume for persistent data
     volumes:
       - ${APP_DATA_DIR}/data:/data
 
-    healthcheck:
-      test: ["CMD", "surreal", "ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+    # SurrealDB listens on 0.0.0.0:8000 by default. We do NOT need to expose ports
+    # because the Umbrel proxy container (above) handles inbound connections.
+    environment:
+      # If you would like to set SurrealDB's root user from Umbrel,
+      # you can pass Umbrel's $APP_PASSWORD as the SurrealDB password.
+      #
+      #   e.g. command: [ "start", "rocksdb:/data/mydb.db",
+      #                   "--user", "root", "--pass", "$APP_PASSWORD" ]
+      #
+      # so that each user sees a unique password in Umbrel's UI.
+
+      # Umbrel automatically provides $APP_PASSWORD to your container. 
+      # Here, we just show how you might reference it:
+      SURREALDB_ROOT_USER: root
+      SURREALDB_ROOT_PASS: $APP_PASSWORD
+
+    # By default, SurrealDB's Docker image starts with:
+    #     surreal start <engine:database>
+    # If you want to specify it explicitly (to set up logs, etc.):
+    command: [
+      "start",
+      # The database location (on-disk) with the RocksDB engine
+      "rocksdb:/data/surrealdb.db",
+      "--log", "info",
+      "--user", "root",
+      "--pass", "$APP_PASSWORD"
+    ]
