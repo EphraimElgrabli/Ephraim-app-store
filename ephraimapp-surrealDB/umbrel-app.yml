@@ -5,28 +5,20 @@ name: SurrealDB
 version: "2.1.4"
 tagline: "A scalable and fast database for the cloud, serverless environments, and the edge."
 description: "SurrealDB is a multi-model database built for modern applications, offering document, graph, and key-value storage in one system."
-developer: "SurrealDB"
+releaseNotes: "Initial release of SurrealDB integration with UmbrelOS."
+developer: "SurrealDB Team"
 website: "https://surrealdb.com"
-dependencies: []
-repo: "https://github.com/surrealdb/surrealdb"
+repository: "https://github.com/surrealdb/surrealdb"
 support: "https://github.com/surrealdb/surrealdb/issues"
+path: ""
+ports:
+  - 8000
+icon: "https://surrealdb.com/favicon.ico"
 gallery:
   - "https://surrealdb.com/assets/img/showcase-1.png"
-path: "/surrealdb"
-defaultPassword: "password"
-deterministicPassword: false
-ports:
-  - "8000:8000"
-volumes:
-  - name: surrealdb_data
-    mount: /data
-container:
-  image: "surrealdb/surrealdb:latest"
-  restart: unless-stopped
-  command: ["start", "--user", "root", "--pass", "password"]
-  env:
-    - SURREAL_LOG=info
-  ports:
-    - "8000:8000"
-  volumes:
-    - surrealdb_data:/data
+  - "https://surrealdb.com/assets/img/showcase-2.png"
+  - "https://surrealdb.com/assets/img/showcase-3.png"
+dependencies: []
+minUmbrelVersion: "0.5.0"
+hiddenService: true
+defaultPassword: "${APP_PASSWORD}"
