@@ -1,36 +1,25 @@
-# Omit or remove the version line to avoid Umbrel's “obsolete” warnings.
-# version: "3.7"
-
 services:
   # ------------------------------------------------------
-  # 1) Umbrel proxy
+  # 1) Umbrel Proxy
   # ------------------------------------------------------
   app_proxy:
     environment:
-      # Must match <app-id>_<service-name>_1
-      # If your app ID is "ephraimapps-surrealdb" and your service is "server",
-      # this container will be "ephraimapps-surrealdb_server_1".
+      # This must match the app ID and service name
       APP_HOST: ephraimapps-surrealdb_server_1
-      # SurrealDB listens by default on 8000 (HTTP).
+      # SurrealDB's default HTTP port is 8000, but we're using 7892
       APP_PORT: 7892
 
   # ------------------------------------------------------
-  # 2) SurrealDB server
+  # 2) SurrealDB Server
   # ------------------------------------------------------
   server:
     image: surrealdb/surrealdb:latest
-
-    # If you have permission errors on Umbrel, consider removing or adjusting this line
-    # user: "1000:1000"
-
-    # Ensure SurrealDB restarts on failure
-    restart: on-failure
+    container_name: surrealdb_server
+    restart: unless-stopped
     stop_grace_period: 1m
     init: true
 
-    # SurrealDB "start" command example:
-    #  - Binds to "0.0.0.0:7892" so it can accept connections within Docker
-    #  - "file:///data" ensures SurrealDB stores data in /data
+    # SurrealDB "start" command
     command:
       [
         "start",
@@ -45,6 +34,19 @@ services:
         "file:///data"
       ]
 
+    # Persistent storage for database
     volumes:
-      # Map Umbrel's persistent data dir to /data in the container
       - ${APP_DATA_DIR}/data:/data
+
+
+    # Environment Variables (Optional)
+    environment:
+      SURREALDB_USER: "umbrel"
+      SURREALDB_PASS: "secretpassword"
+
+    networks:
+      - surrealdb_net
+
+networks:
+  surrealdb_net:
+    driver: bridge

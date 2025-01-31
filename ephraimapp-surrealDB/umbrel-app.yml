@@ -5,7 +5,7 @@ name: SurrealDB
 tagline: A scalable, distributed, document-graph database for the real-time web
 icon: https://github.com/surrealdb/surrealdb/raw/main/img/whatissurreal.svg
 category: Database
-version: "1.0.0"
+version: "1.0.1"
 port: 7892
 
 description: >-
