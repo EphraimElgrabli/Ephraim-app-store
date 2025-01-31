@@ -3,7 +3,7 @@ manifestVersion: 1
 id: ephraimapps-surrealdb
 name: SurrealDB
 tagline: A scalable, distributed, document-graph database for the real-time web
-icon: https://raw.githubusercontent.com/surrealdb/surrealdb/main/static/surrealdb-logo.svg
+icon: https://github.com/surrealdb/surrealdb/raw/main/img/whatissurreal.svg
 category: Database
 version: "1.0.0"
 port: 8000
@@ -22,9 +22,8 @@ repo: https://github.com/surrealdb/surrealdb
 support: https://discord.gg/surrealdb
 
 gallery:
-  - https://surrealdb.com/docs/branding/surrealdb_screenshot.png
-  - https://surrealdb.com/docs/branding/surrealdb_screenshot2.png
-  - https://surrealdb.com/docs/branding/surrealdb_screenshot3.png
+  - https://github.com/surrealdb/surrealdb/raw/main/img/interface.png
+  - https://github.com/surrealdb/surrealdb/raw/main/img/illustrations/database-api-security.jpg
 
 releaseNotes: >-
   Initial release of SurrealDB on Umbrel. SurrealDB is now
