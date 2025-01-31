@@ -1,5 +1,5 @@
 manifestVersion: 1
-id: surrealdb
+id: ephraimapps-surrealdb
 category: database
 name: SurrealDB
 version: "1.0.0"
