@@ -12,7 +12,7 @@ services:
       # this container will be "ephraimapps-surrealdb_server_1".
       APP_HOST: ephraimapps-surrealdb_server_1
       # SurrealDB listens by default on 8000 (HTTP).
-      APP_PORT: 8000
+      APP_PORT: 7892
 
   # ------------------------------------------------------
   # 2) SurrealDB server
@@ -29,13 +29,13 @@ services:
     init: true
 
     # SurrealDB "start" command example:
-    #  - Binds to "0.0.0.0:8000" so it can accept connections within Docker
+    #  - Binds to "0.0.0.0:7892" so it can accept connections within Docker
     #  - "file:///data" ensures SurrealDB stores data in /data
     command:
       [
         "start",
         "--bind",
-        "0.0.0.0:8000",
+        "0.0.0.0:7892",
         "--user",
         "umbrel",
         "--pass",
