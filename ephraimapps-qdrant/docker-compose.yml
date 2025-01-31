@@ -1,0 +1,43 @@
+# Omit or remove the version line to avoid the “obsolete” warning in Umbrel logs
+# version: "3.7"
+
+services:
+  # -------------------------------------------------------
+  # 1) Umbrel proxy service (routes HTTP requests)
+  # -------------------------------------------------------
+  app_proxy:
+    environment:
+      # This must match the container name: <umbrel-app-id>_<service-name>_1
+      # If your Umbrel app ID is "qdrant" and your Qdrant service is named "server",
+      # then the container is "qdrant_server_1".
+      APP_HOST: qdrant_server_1
+      # Qdrant HTTP port is 6333
+      APP_PORT: 6333
+
+  # -------------------------------------------------------
+  # 2) Qdrant server
+  # -------------------------------------------------------
+  server:
+    # Pin the image to a stable version or add a sha256 digest if desired
+    image: qdrant/qdrant:v1.4.0
+
+    # (Optional) If you want to run Qdrant as Umbrel’s non-root user:
+    # user: "1000:1000"
+
+    restart: on-failure
+    # Let the container gracefully stop
+    stop_grace_period: 1m
+    # Some images benefit from "init: true" on Umbrel
+    init: true
+
+    # Qdrant’s built-in environment variables (optional)
+    # For example, if you want to explicitly set HTTP and gRPC ports or other config:
+    # environment:
+    #   QDRANT__SERVICE__HTTP_PORT: 6333
+    #   QDRANT__SERVICE__GRPC_PORT: 6334
+    #   QDRANT__STORAGE__WAL_CONFIG__SYNC_INTERVAL_MS: 1000
+    #   ...
+
+    # Persistent storage inside Umbrel’s data dir
+    volumes:
+      - ${APP_DATA_DIR}/data:/qdrant/storage

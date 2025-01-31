@@ -1,0 +1,36 @@
+manifestVersion: 1
+
+id: ephraimapps-qdrant
+name: Qdrant Vector Database
+tagline: A high-performance vector database and vector search engine.
+icon: https://raw.githubusercontent.com/qdrant/qdrant/main/docs/logo.png
+category: Database
+version: "1.0.0"
+port: 6333
+description: >-
+  Qdrant is a powerful vector search database designed for blazing fast queries
+  on embeddings and other vector data.
+
+  It's ideal for AI-powered applications, semantic search, and large-scale
+  recommendations.
+
+developer: Qdrant
+website: https://qdrant.tech
+submitter: Ephraim
+submission: https://github.com/ephraimapps/umbrel-qdrant
+repo: https://github.com/qdrant/qdrant
+support: https://github.com/qdrant/qdrant/issues
+
+gallery:
+  - https://user-images.githubusercontent.com/236616/232332700-2f06d4f2-5ef6-4386-9918-63b85f5da47c.png
+  - https://user-images.githubusercontent.com/236616/232332703-1888265c-4520-4eea-84fd-5756aa14488e.png
+  - https://user-images.githubusercontent.com/236616/232332706-ceffc63b-4498-4e87-b0f7-e22f7463ebe7.png
+
+releaseNotes: >-
+  Initial release of Qdrant for Umbrel. This version provides local vector
+  indexing and fast approximate nearest neighbor searches.
+
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
