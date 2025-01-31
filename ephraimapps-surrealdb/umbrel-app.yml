@@ -2,7 +2,7 @@ manifestVersion: 1
 id: ephraimapps-surrealdb
 category: database
 name: SurrealDB
-version: "2.0.0"
+version: "2.0.1"
 tagline: Modern, multi-model database
 description: >-
   SurrealDB is a scalable, distributed, multi-model database 
