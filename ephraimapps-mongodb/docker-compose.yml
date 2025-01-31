@@ -1,35 +1,50 @@
-version: "3.7"
-
-x-environment: &mongo_env
-  MONGO_INITDB_ROOT_USERNAME: "umbrel"
-  MONGO_INITDB_ROOT_PASSWORD: "secretpassword"
+# Omit or remove the version line to avoid Umbrel's “obsolete” warnings.
+# version: "3.7"
 
 services:
+  # ------------------------------------------------------
+  # 1) Umbrel proxy
+  # ------------------------------------------------------
   app_proxy:
     environment:
-      APP_HOST: ephraimapps-mongodb_mongo-express_1
-      APP_PORT: 8084
+      # Must match <app-id>_<service-name>_1
+      # If your app ID is "ephraimapps-surrealdb" and your service is "server",
+      # this container will be "ephraimapps-surrealdb_server_1".
+      APP_HOST: ephraimapps-surrealdb_server_1
+      # SurrealDB listens by default on 8000 (HTTP).
+      APP_PORT: 8000
 
-  mongo:
-    image: mongo:7.0.0
+  # ------------------------------------------------------
+  # 2) SurrealDB server
+  # ------------------------------------------------------
+  server:
+    image: surrealdb/surrealdb:latest
+
+    # If you have permission errors on Umbrel, consider removing or adjusting this line
+    # user: "1000:1000"
+
+    # Ensure SurrealDB restarts on failure
     restart: on-failure
-    ports:
-      - "27017:27017"
-    command: ["--bind_ip_all"]
-    environment:
-      <<: *mongo_env
+    stop_grace_period: 1m
+    init: true
+
+    # SurrealDB "start" command example:
+    #  - Binds to "0.0.0.0:8000" so it can accept connections within Docker
+    #  - "file:///data" ensures SurrealDB stores data in /data
+    command:
+      [
+        "start",
+        "--bind",
+        "0.0.0.0:8000",
+        "--user",
+        "umbrel",
+        "--pass",
+        "secretpassword",
+        "--log",
+        "debug",
+        "file:///data"
+      ]
+
     volumes:
-      - ${APP_DATA_DIR}/data:/data/db
-
-  mongo-express:
-    image: mongo-express:latest
-    restart: on-failure
-    # Remove the ports mapping since app_proxy handles external access
-    depends_on:
-      - mongo
-    environment:
-      ME_CONFIG_MONGODB_SERVER: mongo
-      ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_ADMINUSERNAME: "umbrel"
-      ME_CONFIG_MONGODB_ADMINPASSWORD: "secretpassword"
-      ME_CONFIG_SITE_PORT: 8084
+      # Map Umbrel's persistent data dir to /data in the container
+      - ${APP_DATA_DIR}/data:/data

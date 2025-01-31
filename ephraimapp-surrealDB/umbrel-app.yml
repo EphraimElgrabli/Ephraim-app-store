@@ -1,0 +1,39 @@
+manifestVersion: 1
+
+id: ephraimapps-surrealdb
+name: SurrealDB
+tagline: A scalable, distributed, document-graph database for the real-time web
+icon: https://raw.githubusercontent.com/surrealdb/surrealdb/main/static/surrealdb-logo.svg
+category: Database
+version: "1.0.0"
+port: 8000
+
+description: >-
+  SurrealDB is a next-generation, serverless, distributed,
+  open-source database with a simple, structured query language. This
+  Umbrel app runs SurrealDB locally for your projects, storing data
+  in a persistent Umbrel volume.
+
+developer: SurrealDB
+website: https://surrealdb.com
+submitter: Ephraim
+submission: https://github.com/ephraimapps/surrealdb-umbrel
+repo: https://github.com/surrealdb/surrealdb
+support: https://discord.gg/surrealdb
+
+gallery:
+  - https://surrealdb.com/docs/branding/surrealdb_screenshot.png
+  - https://surrealdb.com/docs/branding/surrealdb_screenshot2.png
+  - https://surrealdb.com/docs/branding/surrealdb_screenshot3.png
+
+releaseNotes: >-
+  Initial release of SurrealDB on Umbrel. SurrealDB is now
+  available for local vector, document, and graph data storage,
+  with minimal configuration.
+
+dependencies: []
+path: ""
+
+# SurrealDB default root credentials (if you wish to show them in Umbrel's UI)
+defaultUsername: "umbrel"
+defaultPassword: "secretpassword"
