@@ -1,31 +1,30 @@
 manifestVersion: 1
 
-id: ephraimapps-matchpairs
-name: Memory Match
-tagline: A fun and engaging memory matching card game
-icon: https://raw.githubusercontent.com/ephraimapps/memory-match/main/icon.png
+id: ephraimapps-wordwall
+name: Word Wall Game
+tagline: A fun and engaging word matching game
+icon: https://raw.githubusercontent.com/ephraimapps/word-wall-game/main/icon.png
 category: Games
 version: "1.0.0"
 port: 9287
 description: >-
-  Memory Match is a classic card-matching game that challenges your memory and concentration.
-  
-  Features:
-  - Multiple difficulty levels
-  - Beautiful card designs
-  - Perfect for all ages
+  Word Wall is a classic word-matching game that challenges your vocabulary and concentration.
 
 developer: Ephraim Apps
 website: https://elgrab.li
 submitter: Ephraim
-
+submission: https://github.com/ephraimapps/umbrel-qdrant
+repo: https://github.com/qdrant/qdrant
+support: https://github.com/qdrant/qdrant/issues
 
 gallery:
-
+  - https://user-images.githubusercontent.com/236616/232332700-2f06d4f2-5ef6-4386-9918-63b85f5da47c.png
+  - https://user-images.githubusercontent.com/236616/232332703-1888265c-4520-4eea-84fd-5756aa14488e.png
+  - https://user-images.githubusercontent.com/236616/232332706-ceffc63b-4498-4e87-b0f7-e22f7463ebe7.png
 
 releaseNotes: >-
-  Initial release of Memory Match game. Includes basic gameplay mechanics,
-  three difficulty levels, and score tracking.
+  Initial release of Qdrant for Umbrel. This version provides local vector
+  indexing and fast approximate nearest neighbor searches.
 
 dependencies: []
 path: ""
