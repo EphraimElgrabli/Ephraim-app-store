@@ -1,0 +1,33 @@
+manifestVersion: 1
+
+id: ephraimapps-matchpairs
+name: Memory Match
+tagline: A fun and engaging memory matching card game
+icon: https://raw.githubusercontent.com/ephraimapps/memory-match/main/icon.png
+category: Games
+version: "1.0.0"
+port: 9287
+description: >-
+  Memory Match is a classic card-matching game that challenges your memory and concentration.
+  
+  Features:
+  - Multiple difficulty levels
+  - Beautiful card designs
+  - Perfect for all ages
+
+developer: Ephraim Apps
+website: https://elgrab.li
+submitter: Ephraim
+
+
+gallery:
+
+
+releaseNotes: >-
+  Initial release of Memory Match game. Includes basic gameplay mechanics,
+  three difficulty levels, and score tracking.
+
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
