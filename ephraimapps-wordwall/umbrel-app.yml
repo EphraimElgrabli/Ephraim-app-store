@@ -1,30 +1,32 @@
+# ephraimapps-wordwall/umbrel-app.yml
 manifestVersion: 1
 
 id: ephraimapps-wordwall
 name: Word Wall Game
-tagline: A fun and engaging word matching game
+tagline: A fun and engaging word-matching game
 icon: https://raw.githubusercontent.com/ephraimapps/word-wall-game/main/icon.png
 category: Games
 version: "1.0.0"
 port: 9287
 description: >-
-  Word Wall is a classic word-matching game that challenges your vocabulary and concentration.
+  Word Wall is a classic word-matching game that challenges your vocabulary
+  and concentration. Flip tiles to find matching words before time runs out!
 
 developer: Ephraim Apps
 website: https://elgrab.li
 submitter: Ephraim
-submission: https://github.com/ephraimapps/umbrel-qdrant
-repo: https://github.com/qdrant/qdrant
-support: https://github.com/qdrant/qdrant/issues
+submission: https://github.com/ephraimapps/umbrel-app-store
+repo: https://github.com/ephraimapps/word-wall-game
+support: https://github.com/ephraimapps/word-wall-game/issues
 
 gallery:
-  - https://user-images.githubusercontent.com/236616/232332700-2f06d4f2-5ef6-4386-9918-63b85f5da47c.png
-  - https://user-images.githubusercontent.com/236616/232332703-1888265c-4520-4eea-84fd-5756aa14488e.png
-  - https://user-images.githubusercontent.com/236616/232332706-ceffc63b-4498-4e87-b0f7-e22f7463ebe7.png
+  - https://raw.githubusercontent.com/ephraimapps/word-wall-game/main/screenshot1.png
+  - https://raw.githubusercontent.com/ephraimapps/word-wall-game/main/screenshot2.png
+  - https://raw.githubusercontent.com/ephraimapps/word-wall-game/main/screenshot3.png
 
 releaseNotes: >-
-  Initial release of Qdrant for Umbrel. This version provides local vector
-  indexing and fast approximate nearest neighbor searches.
+  Initial release of Word Wall on Umbrel. Enjoy a local, self-hosted
+  word-matching memory game!
 
 dependencies: []
 path: ""
