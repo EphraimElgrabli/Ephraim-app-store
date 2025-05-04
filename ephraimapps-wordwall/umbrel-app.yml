@@ -7,7 +7,7 @@ tagline: A fun and engaging word-matching game
 icon: https://raw.githubusercontent.com/ephraimapps/word-wall-game/main/icon.png
 category: Games
 version: "1.0.0"
-port: 9287
+port: 3000
 description: >-
   Word Wall is a classic word-matching game that challenges your vocabulary
   and concentration. Flip tiles to find matching words before time runs out!
